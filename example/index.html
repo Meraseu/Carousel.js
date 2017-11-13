@@ -1,0 +1,99 @@
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Carousel Example</title>
+    <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <style>
+    * {padding:0; margin:0;}
+    .carousel-wrap {overflow:hidden; position:relative; width:808px;}
+    .carousel-wrap .button-control {display:block; position:absolute; top:105px; padding:10px; border:0; background-color:transparent; cursor:pointer;}
+    .carousel-wrap .button-control:hover {color:#fff; background-color:rgba(0,0,0,.3);}
+    .carousel-wrap .button-prev {left:0;}
+    .carousel-wrap .button-next {right:0;}
+    .carousel-view {overflow:hidden; position:relative; width:808px; height:240px; margin-bottom:3px;}
+    .carousel-view-container {overflow:hidden; position:relative; width:100%; height:240px;}
+    .carousel-view .item {overflow:hidden; position:relative; float:left; width:100%; height:240px; text-align:center; line-height:240px;}
+    .carousel-view .item.item1 {background-color:#f8f9fa;}
+    .carousel-view .item.item2 {background-color:#f1f3f5;}
+    .carousel-view .item.item3 {background-color:#e9ecef;}
+    .carousel-view .item.item4 {background-color:#dee2e6;}
+    .carousel-view .item.item5 {background-color:#ced4da;}
+    .carousel-view .item.item7 {background-color:#adb5bd;}
+    .carousel-view .item.item8 {background-color:#868e96;}
+    .carousel-view .item.item10 {background-color:#495057;}
+    .carousel-view .item.item11 {background-color:#343a40;}
+    .carousel-view .item.item12 {background-color:#212529;}
+    .carousel-view .item.item13 {background-color:#fff4e6;}
+    .carousel-view .item.item14 {background-color:#ffe8cc;}
+    .carousel-view .item.item15 {background-color:#ffd8a8;}
+    .carousel-view .item.item16 {background-color:#ffc078;}
+    .carousel-nav {overflow:hidden; position:relative; width:100%; height:60px;}
+    .carousel-nav.nowrap {overflow-y:auto;}
+    .carousel-nav ul {overflow:hidden; position:relative; width:100%;}
+    .carousel-nav ul li {float:left; overflow:hidden; position:relative; width:60px; height:60px; margin-right:3px; background-color:#888; font-size:0;}
+    .carousel-nav ul li button {display:block; width:60px; height:60px; border:0; background-color:transparent; vertical-align:top; box-sizing:border-box; cursor:pointer;}
+    .carousel-nav ul li button.active {border:3px solid #00AEF0;}
+    </style>
+</head>
+<body>
+    <div class="carousel-wrap">
+        <div class="carousel-view">
+            <div class="carousel-view-container">
+                <div class="item item1">1</div>
+                <div class="item item2">2</div>
+                <div class="item item3">3</div>
+                <div class="item item4">4</div>
+                <div class="item item5">5</div>
+                <div class="item item6">6</div>
+                <div class="item item7">7</div>
+                <div class="item item8">8</div>
+                <div class="item item9">9</div>
+                <div class="item item10">10</div>
+                <div class="item item11">11</div>
+                <div class="item item12">12</div>
+                <div class="item item13">13</div>
+                <div class="item item14">14</div>
+                <div class="item item15">15</div>
+                <div class="item item16">16</div>
+            </div>
+        </div>
+        <div class="carousel-nav">
+            <ul>
+                <li><button type="button" class="button">1</button></li>
+                <li><button type="button" class="button">2</button></li>
+                <li><button type="button" class="button">3</button></li>
+                <li><button type="button" class="button">4</button></li>
+                <li><button type="button" class="button">5</button></li>
+                <li><button type="button" class="button">6</button></li>
+                <li><button type="button" class="button">7</button></li>
+                <li><button type="button" class="button">8</button></li>
+                <li><button type="button" class="button">9</button></li>
+                <li><button type="button" class="button">10</button></li>
+                <li><button type="button" class="button">11</button></li>
+                <li><button type="button" class="button">12</button></li>
+                <li><button type="button" class="button">13</button></li>
+                <li><button type="button" class="button">14</button></li>
+                <li><button type="button" class="button">15</button></li>
+                <li><button type="button" class="button">16</button></li>
+            </ul>
+        </div>
+        <!-- <button type="button" class="button button-control button-prev"><i class="fa fa-chevron-left" aria-hidden="true"></i></button>
+        <button type="button" class="button button-control button-next"><i class="fa fa-chevron-right" aria-hidden="true"></i></button> -->
+        <button type="button" class="button button-control button-prev">Prev</button>
+        <button type="button" class="button button-control button-next">Next</button>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="../carousel.js"></script>
+    <script>
+    ;(function() {
+
+        $('.carousel-wrap').Carousel({
+            index : 5
+        });	
+
+    })();
+    </script>
+</body>
+</html>
