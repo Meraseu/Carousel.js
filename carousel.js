@@ -1,14 +1,3 @@
-<<<<<<< HEAD
-;(function($) {
-    
-	$.Carousel = function(element, options) {
-
-	    if(!element) {
-		  return false;
-	    }
-	    var carousel = this;
-		
-=======
 ;(function($) {    
 	$.Carousel = function(element, options) {
 	    if(!element) {
@@ -16,17 +5,12 @@
 	    }
         var carousel = this;
         options = options || {};
->>>>>>> origin/develop
 	    var opts = {
             width : 360,
             padding : 136,
             duration : 500,
             index : (options.index - 1) || 0
         }
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/develop
 	    var $this = $(element),
             $view = $this.find('.carousel-view'),
             $viewContainer = $view.find('.carousel-view-container'),
@@ -42,21 +26,11 @@
             $breakPoint = [],
             $containerWidth = $this.width(),
             $navWidth = 0;
-<<<<<<< HEAD
-
 	    carousel.init = function() {
-
-=======
-	    carousel.init = function() {
->>>>>>> origin/develop
             var $containerWidth = $this.width();
             var $navItemWidth = $navItems.filter(':eq(0)').width();
             var $margin = parseInt($navItems.filter(':eq(0)').css('margin-right').replace("px", ""));
             var sum = 0;
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/develop
             $viewContainer.css('width', (opts.width * $total));
             $viewItems.each(function(i) {
                 $(this).css('width', opts.width);
@@ -65,21 +39,6 @@
                     $breakPoint.push(i);
                 }
             })
-<<<<<<< HEAD
-
-            $navWidth = ($navItemWidth + $margin) * ($breakPoint[0] - 1);
-
-            var scrollSize = 0;
-            var offsetSize = 0;
-
-            $nav.addClass('nowrap');
-
-            scrollSize = $nav[0].scrollHeight;
-            offsetSize = $nav[0].offsetHeight;
-
-            $nav.removeClass('nowrap');
-
-=======
             $navWidth = ($navItemWidth + $margin) * ($breakPoint[0] - 1);
             var scrollSize = 0;
             var offsetSize = 0;
@@ -87,7 +46,6 @@
             scrollSize = $nav[0].scrollHeight;
             offsetSize = $nav[0].offsetHeight;
             $nav.removeClass('nowrap');
->>>>>>> origin/develop
             if(scrollSize > offsetSize) {
                 var width = $navItems.width();
                 $nav.css('width', ((width + $margin) * $total));
@@ -96,18 +54,6 @@
             this.selectedNav($current);
             this.onViewAnimation('', $current);
             this.onNav();
-<<<<<<< HEAD
-
-            this.onControl();
-
-	    };
-	    carousel.onNav = function() {
-
-            var self = this;
-
-            $navButtons.on('click', function() {
-
-=======
             this.onControl();
 	    };
 	    carousel.onNav = function() {
@@ -116,7 +62,6 @@
                 if(self.isAnimated()) {
                     return false;
                 }
->>>>>>> origin/develop
                 var index = $navButtons.index($(this));
                 if($current === index) {
                     return false;
@@ -126,21 +71,6 @@
                 self.onViewAnimation('', index);
                 $current = index;
                 carousel.onNavAnimation()
-<<<<<<< HEAD
-
-            });
-
-	    };
-	    carousel.onControl = function() {
-
-            var self = this;
-
-            $buttons.on('click', function() {
-                if($viewContainer.is(':animated')) {
-                    return false;
-                }
-
-=======
             });
 	    };
 	    carousel.onControl = function() {
@@ -149,28 +79,18 @@
                 if(self.isAnimated()) {
                     return false;
                 }
->>>>>>> origin/develop
                 var isBackBtn = $(this).hasClass('button-prev');
                 if(isBackBtn) {
                     self.onPrevCarousel();
                 } else {
                     self.onNextCarousel();
                 }
-<<<<<<< HEAD
-
-                carousel.onNavAnimation();
-
-            });
-
-	    }
-=======
                 carousel.onNavAnimation();
             });
         }
         carousel.isAnimated = function() {
             return $viewContainer.is(':animated');
         }
->>>>>>> origin/develop
 	    carousel.getAnimationWidth = function() {
             if($current < 0) {
                 return $endMargin;
@@ -185,17 +105,6 @@
             }
         }
         carousel.getDirectAnimationWidth = function(index) {
-<<<<<<< HEAD
-            console.log(index);
-            if(index === 0) {
-                return 0;
-            } else if(index < 2) {
-                return (opts.padding);
-            } else if(index > 1 && index < $total - 1) {
-                return ((opts.width * (index - 1)) + opts.padding);
-            } else if(index > 1 && index === $total - 1) {
-                return ((opts.width * (index - 2)) + (opts.padding * 2));
-=======
             if(index === 0) {
                 return 0;
             } else if(index < 2) {
@@ -204,7 +113,6 @@
                 return (opts.width * (index - 1)) + opts.padding;
             } else if(index > 1 && index === $total - 1) {
                 return (opts.width * (index - 2)) + (opts.padding * 2);
->>>>>>> origin/develop
             }
         }
         carousel.getMargin = function() {
@@ -223,12 +131,6 @@
             $navButtons.filter(':eq(' + index + ')').removeClass('active');
 	    };
 	    carousel.onViewAnimation = function(direction, index) {
-<<<<<<< HEAD
-            if($viewContainer.is(':animated')) {
-                return false;
-            }
-=======
->>>>>>> origin/develop
             var $originalValue = this.getAnimationWidth();
             var $value = direction ? direction + '=' + $originalValue : -(this.getDirectAnimationWidth(index));
             var $text = ($originalValue === 0) ? 0 : $value + 'px';
@@ -258,10 +160,6 @@
 	    }
 	    carousel.init();
 	}
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/develop
 	$.fn.Carousel = function(options) {
 	    return this.each(function() {
 		  if (undefined == $(this).data('Carousel')) {
@@ -270,8 +168,4 @@
 		  }
 	    });
 	}
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/develop
 })(jQuery);
