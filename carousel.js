@@ -131,7 +131,6 @@
             $navButtons.filter(':eq(' + index + ')').removeClass('active');
 	    };
 	    carousel.onViewAnimation = function(direction, index) {
-            console.log(direction, index, $current);
             var $originalValue = this.getAnimationWidth();
             var $value = direction ? direction + '=' + $originalValue : -(this.getDirectAnimationWidth(index));
             var $text = ($originalValue === 0) ? 0 : $value + 'px';
