@@ -14,9 +14,13 @@
 	    var $this = $(element),
             $view = $this.find('.carousel-view'),
             $viewContainer = $view.find('.carousel-view-container'),
+            $viewContainerWidth = $viewContainer.width(),
             $viewItems = $view.find('.item'),
             $nav = $this.find('.carousel-nav'),
+            $navWidth = 0,
             $navItems = $nav.find('li'),
+            $navItemsWidth = $navItems.filter(':eq(0)').width(),
+            $navItemsMargin = parseInt($navItems.filter(':eq(0)').css('margin-right'),10),
             $navButtons = $nav.find('button'),
             $buttons = $this.find('> .button'),
             $total = $viewItems.length,
@@ -26,7 +30,7 @@
             $breakPoint = [],
             $breakPointIndex = 0,
             $containerWidth = $this.width(),
-            $navWidth = 0;
+            $navSlideWidth = 0;
 	    carousel.init = function() {
             var $containerWidth = $this.width();
             var $navItemWidth = $navItems.filter(':eq(0)').width();
@@ -50,7 +54,7 @@
                 $(this).attr('data-breakpoint',$breakPointIndex);
             });
             $breakPointIndex = 0;
-            $navWidth = ($navItemWidth + $margin) * ($breakPoint[0] - 1);
+            $navSlideWidth = ($navItemWidth + $margin) * ($breakPoint[0] - 1);
             var scrollSize = 0;
             var offsetSize = 0;
             $nav.addClass('nowrap');
@@ -59,8 +63,8 @@
             $nav.removeClass('nowrap');
             if(scrollSize > offsetSize) {
                 var width = $navItems.width();
-                $nav.css('width', ((width + $margin) * $total));
-                
+                $navWidth = ((width + $margin) * $total);
+                $nav.css('width', $navWidth);
             }
             this.selectedNav($current);
             this.onViewAnimation('', $current);
@@ -154,15 +158,22 @@
         }
         carousel.onNavAnimation = function(index) {
             index = index || $current;
+            var $margin = 0;
             if($current === 0) {
                 $breakPointIndex = 0;
+                $margin = $navSlideWidth * $breakPointIndex;
             } else if($current === $total - 1) {
-                $breakPointIndex = $breakPoint.length;
+                $margin = ($navSlideWidth * ($breakPointIndex - 1) + (($navWidth - $viewContainerWidth) - ($navSlideWidth * ($breakPointIndex - 1)))) - $navItemsMargin;
             } else {
                 $breakPointIndex = $navButtons.filter(':eq(' + index + ')').attr('data-breakpoint');
+                if($breakPointIndex == $breakPoint.length) {
+                    $margin = ($navSlideWidth * ($breakPointIndex - 1) + (($navWidth - $viewContainerWidth) - ($navSlideWidth * ($breakPointIndex - 1)))) - $navItemsMargin;
+                } else {
+                    $margin = $navSlideWidth * $breakPointIndex;
+                }
             }
             $nav.stop().animate({
-                "margin-left" : '-' + ($navWidth * $breakPointIndex) + 'px'
+                "margin-left" : '-' + $margin + 'px'
             }, opts.duration);
             
         }
