@@ -41,13 +41,11 @@
                 $(this).css('width', opts.width);
                 sum += $navItemWidth + $margin;
                 if(sum > $containerWidth) {
-                    console.log($breakPointIndex + 1);
                     $breakPoint.push(($breakPointIndex === 0) ? i : i - ($breakPointIndex + 1));
                     $breakPointIndex++;
                     sum = $navItemWidth + $margin;
                 }
             });
-            console.log($breakPoint);
             $breakPointIndex = 0;
             $navButtons.each(function(i) {
                 if(i === $breakPoint[$breakPointIndex]) {
