@@ -14,9 +14,13 @@
 	    var $this = $(element),
             $view = $this.find('.carousel-view'),
             $viewContainer = $view.find('.carousel-view-container'),
+            $viewContainerWidth = $viewContainer.width(),
             $viewItems = $view.find('.item'),
             $nav = $this.find('.carousel-nav'),
+            $navWidth = 0,
             $navItems = $nav.find('li'),
+            $navItemsWidth = $navItems.filter(':eq(0)').width(),
+            $navItemsMargin = parseInt($navItems.filter(':eq(0)').css('margin-right'),10),
             $navButtons = $nav.find('button'),
             $buttons = $this.find('> .button'),
             $total = $viewItems.length,
@@ -24,8 +28,9 @@
             $direction = '',
             $current = opts.index,
             $breakPoint = [],
+            $breakPointIndex = 0,
             $containerWidth = $this.width(),
-            $navWidth = 0;
+            $navSlideWidth = 0;
 	    carousel.init = function() {
             var $containerWidth = $this.width();
             var $navItemWidth = $navItems.filter(':eq(0)').width();
@@ -36,10 +41,22 @@
                 $(this).css('width', opts.width);
                 sum += $navItemWidth + $margin;
                 if(sum > $containerWidth) {
-                    $breakPoint.push(i);
+                    console.log($breakPointIndex + 1);
+                    $breakPoint.push(($breakPointIndex === 0) ? i : i - ($breakPointIndex + 1));
+                    $breakPointIndex++;
+                    sum = $navItemWidth + $margin;
                 }
-            })
-            $navWidth = ($navItemWidth + $margin) * ($breakPoint[0] - 1);
+            });
+            console.log($breakPoint);
+            $breakPointIndex = 0;
+            $navButtons.each(function(i) {
+                if(i === $breakPoint[$breakPointIndex]) {
+                    $breakPointIndex++;
+                }
+                $(this).attr('data-breakpoint',$breakPointIndex);
+            });
+            $breakPointIndex = 0;
+            $navSlideWidth = ($navItemWidth + $margin) * ($breakPoint[0] - 1);
             var scrollSize = 0;
             var offsetSize = 0;
             $nav.addClass('nowrap');
@@ -48,8 +65,8 @@
             $nav.removeClass('nowrap');
             if(scrollSize > offsetSize) {
                 var width = $navItems.width();
-                $nav.css('width', ((width + $margin) * $total));
-                
+                $navWidth = ((width + $margin) * $total);
+                $nav.css('width', $navWidth);
             }
             this.selectedNav($current);
             this.onViewAnimation('', $current);
@@ -70,7 +87,7 @@
                 self.unselectedNav($current);
                 $current = index;
                 self.onViewAnimation('', index);
-                carousel.onNavAnimation()
+                carousel.onNavAnimation(index);
             });
 	    };
 	    carousel.onControl = function() {
@@ -123,7 +140,10 @@
 	    }
 	    carousel.isAtStart = function() {
             return parseInt($viewContainer.css('margin-left'), 10) === 0;
-	    }
+        }
+        carousel.getBreakPointIndex = function(index) {
+            return $.inArray(index, $breakPoint);
+        }
 	    carousel.selectedNav = function(index) {
             $navButtons.filter(':eq(' + index + ')').addClass('active');
 	    };
@@ -138,11 +158,26 @@
                 "margin-left" : $text
             }, opts.duration);
         }
-        carousel.onNavAnimation = function() {
-            var index = Math.floor($current / $breakPoint[0]);
+        carousel.onNavAnimation = function(index) {
+            index = index || $current;
+            var $margin = 0;
+            if($current === 0) {
+                $breakPointIndex = 0;
+                $margin = $navSlideWidth * $breakPointIndex;
+            } else if($current === $total - 1) {
+                $margin = ($navSlideWidth * ($breakPointIndex - 1) + (($navWidth - $viewContainerWidth) - ($navSlideWidth * ($breakPointIndex - 1)))) - $navItemsMargin;
+            } else {
+                $breakPointIndex = $navButtons.filter(':eq(' + index + ')').attr('data-breakpoint');
+                if($breakPointIndex == $breakPoint.length) {
+                    $margin = ($navSlideWidth * ($breakPointIndex - 1) + (($navWidth - $viewContainerWidth) - ($navSlideWidth * ($breakPointIndex - 1)))) - $navItemsMargin;
+                } else {
+                    $margin = $navSlideWidth * $breakPointIndex;
+                }
+            }
             $nav.stop().animate({
-                "margin-left" : '-' + ($navWidth * index) + 'px'
+                "margin-left" : '-' + $margin + 'px'
             }, opts.duration);
+            
         }
 	    carousel.onNextCarousel = function() {
             $direction = '-';
