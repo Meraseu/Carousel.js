@@ -54,7 +54,7 @@
             this.onViewAnimation('', $current);
             this.onNav();
             this.onControl();
-            this.setBreakPoint();
+            // this.setBreakPoint();
         };
         carousel.getBreakPoint = function() {
             $viewItems.each(function (i) {
@@ -63,8 +63,9 @@
                 if (sum > $containerWidth) {
                     $breakPoint.push(($breakPointIndex === 0) ? i : i - ($breakPointIndex));
                     $breakPointIndex++;
-                    sum = $navItemWidth + $margin;
+                    sum = ($navItemWidth + $margin) * 2;
                 }
+                $navButtons.filter(':eq(' + i + ')').attr('data-breakpoint', $breakPointIndex);
             });
         }
         carousel.setBreakPoint = function (direction) {
