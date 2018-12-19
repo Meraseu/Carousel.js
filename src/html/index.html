@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    * {
+        padding: 0;
+        margin: 0;
+    }
+    .carousel {
+        overflow: hidden;
+        position: relative;
+        width: 300px;
+        height: 300px;
+    }
+    .carousel-container {
+        overflow: hidden;
+        position: relative;
+        width: 100%;
+        height: 300px;
+    }
+    .carousel-items {
+        overflow: hidden;
+        position: relative;
+        width: 100%;
+        height: 300px;
+    }
+    .carousel-item {
+        float: left;
+        width: 300px;
+        height: 300px;
+        text-align: center;
+        color: #fff;
+    }
+    .carousel-item:first-child {
+        background-color: black;
+    }
+    .carousel-item:nth-child(2) {
+        background-color: yellow;
+    }
+    .carousel-item:nth-child(3) {
+        background-color: green;
+    }
+    .carousel-arrow {
+        cursor: pointer;
+        background: #55acee;
+        border-radius: 2px;
+        border: 0 none;
+        box-shadow: 0px 2px 10px -3px rgba(0, 0, 0, 0.7);
+        padding: 10px 5px;
+        color: #fff;
+        display: table;
+        margin: auto;
+        font-family: "Helvetica";
+        text-decoration: none;
+        text-transform: uppercase;
+    }
+    </style>
+</head>
+<body>
+    <div class="carousel">
+        <button type="button" class="carousel-arrow carousel-arrow-left">Previous</button>
+        <button type="button" class="carousel-arrow carousel-arrow-right">Next</button>
+        <div class="carousel-container">
+            <div class="carousel-items">
+                <div class="carousel-item">1</div>
+                <div class="carousel-item">2</div>
+                <div class="carousel-item">3</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
